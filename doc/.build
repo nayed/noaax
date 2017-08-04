@@ -5,8 +5,11 @@ fonts/icomoon.eot
 fonts/icomoon.svg
 fonts/icomoon.ttf
 fonts/icomoon.woff
-dist/sidebar_items-68cfd7ab08.js
+dist/sidebar_items-0c95382f25.js
 api-reference.html
 404.html
 Noaax.html
+Noaax.CLI.html
+Noaax.NoaaService.html
+Noaax.StateStation.html
 index.html

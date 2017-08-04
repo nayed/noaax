@@ -1,5 +1,7 @@
 defmodule Noaax.Mixfile do
   use Mix.Project
+  
+  @version "0.1.0"
 
   def project do
     [
@@ -7,7 +9,7 @@ defmodule Noaax.Mixfile do
       escript: escript_config(),
       name: "Noaax",
       source_url: "https://github.com/nayed/noaax",
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.5",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
@@ -18,13 +20,14 @@ defmodule Noaax.Mixfile do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [ :logger, :httpoison, :bunt ]
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:bunt, "~> 0.2.0"},
       {:earmark, "~> 1.2"},
       {:ex_doc, "~> 0.16.2"},
       {:httpoison, "~> 0.12"},
