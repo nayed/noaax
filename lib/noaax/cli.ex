@@ -28,7 +28,7 @@ defmodule Noaax.CLI do
       { [ help: true ], _, _ } -> :help
       { [ state: true ], _, _ } -> :help
       { [ state: true, statename: statename ], _, _ } -> { :state, statename }
-      { _, [ station ], _ } -> station
+      { _, [ station ], _ } -> String.upcase station
       _ -> :help
     end
   end
@@ -62,7 +62,16 @@ defmodule Noaax.CLI do
 
   def process(station) when is_binary(station) do
     Noaax.NoaaService.fetch(station)
+    |> decode_response
+    |> Noaax.Output.print
   end
 
   def process(_), do: process(:help)
+  
+  def decode_response({:ok, body}), do: body
+  def decode_response({:error, _error}) do
+    IO.puts "Error fetching this station. Does it exists?"
+
+    System.halt(0)
+  end
 end

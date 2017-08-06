@@ -30,9 +30,11 @@ defmodule Noaax.Mixfile do
       {:bunt, "~> 0.2.0"},
       {:earmark, "~> 1.2"},
       {:ex_doc, "~> 0.16.2"},
+      {:floki, "~> 0.17.0"},
       {:httpoison, "~> 0.12"},
       {:inch_ex, "~> 0.5", only: :docs},
-      {:poison, "~> 3.1"}
+
+      {:format, git: "https://github.com/michalmuskala/format.git"},
     ]
   end
 

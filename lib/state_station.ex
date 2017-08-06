@@ -4,7 +4,7 @@ defmodule Noaax.StateStation do
   
   @doc """
   """
-  def fetch(statename) do
+  def fetch(_statename) do
 
   end
 end

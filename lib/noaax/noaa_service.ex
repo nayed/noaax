@@ -1,6 +1,9 @@
 defmodule Noaax.NoaaService do
-  @docmodule """
+  @moduledoc """
+  Fetch NOAA web page
   """
+
+  @noaa_url Application.get_env(:noaax, :noaa_url)
 
   @doc """
   Fetch station data, will return a tuple in the form of
@@ -13,7 +16,7 @@ defmodule Noaax.NoaaService do
   end
 
   def noaa_url(station) do
-    "http://w1.weather.gov/xml/current_obs/#{station}.xml"
+    "#{@noaa_url}/#{station}.xml"
   end
 
   def handle_response({ :ok, %{status_code: 200, body: body} }) do
