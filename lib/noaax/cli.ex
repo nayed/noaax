@@ -12,8 +12,8 @@ defmodule Noaax.CLI do
 
   @doc """
   `argv` can be:
+      -s or --state <state>, which returns list of station from <state>.
       -h or --help, which returns :help.
-      -s or --state STATE, which returns list of station from STATE.
       -v or --version, which returns the app version
 
   Otherwise it is an existing NOAA station.
@@ -42,12 +42,17 @@ defmodule Noaax.CLI do
 
   def process(:help) do
     Bunt.puts [:bright, "
-    Usage: noaax <station>"
-    ]
+    Usage: noaax <station>"]
+
     Bunt.puts [:color156, "
     Options:
-    -s, --state <state>       show stations available in the state
+    -s, --state <state>       show stations available in <state>"]
 
+    IO.write "
+        example:
+        $ noaax -s ca         will display station available in California
+    "
+    Bunt.puts [:color156, "
     -h, --help                show this help message and exit
     -v, --version             show noaax version number and exit
     "]

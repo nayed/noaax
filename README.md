@@ -10,8 +10,13 @@
 $ bin/noaax <station>
 
 Options:
--h, --help        show this help message and exit
--v, --version     show noaax version
+-s, --state <state>       show stations available in the <state>
+
+    example:
+    $ bin/noaax -s ca     will display station available in California
+
+-h, --help                show this help message
+-v, --version             show noaax version
 ```
 ![](demo.gif)
 
@@ -26,3 +31,6 @@ $ mix escript.build
 ```
 
 This will create the `noaax` executable file in the `bin` directory
+
+### Documentation
+[API documentation](https://nayed.github.io/noaax/doc/)

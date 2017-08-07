@@ -1,5 +1,5 @@
 defmodule Noaax do
   @moduledoc """
-  Documentation for Noaax.
+  Noaax is a CLI app that fetch and display weather data from NOAA website
   """
 end
