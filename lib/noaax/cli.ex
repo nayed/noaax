@@ -20,14 +20,13 @@ defmodule Noaax.CLI do
   """
   def parse_args(argv) do
     parse = OptionParser.parse(argv,
-                               switches: [ help: :boolean, state: :boolean, statename: :string, version: :boolean ],
-                               aliases: [ h: :help, s: :state, t: :statename, v: :version ])
+                               switches: [ help: :boolean, state: :string, version: :boolean ],
+                               aliases: [ h: :help, s: :state, v: :version ])
 
     case parse do
       { [ version: true ], _, _ } -> :version
       { [ help: true ], _, _ } -> :help
-      { [ state: true ], _, _ } -> :help
-      { [ state: true, statename: statename ], _, _ } -> { :state, statename }
+      { [ state: state ], _, _ } -> { :state, state }
       { _, [ station ], _ } -> String.upcase station
       _ -> :help
     end
@@ -47,17 +46,19 @@ defmodule Noaax.CLI do
     ]
     Bunt.puts [:color156, "
     Options:
-    -t, --state       show stations available in the state
+    -s, --state <state>       show stations available in the state
 
-    -h, --help        show this help message and exit
-    -v, --version     show noaax version number and exit
+    -h, --help                show this help message and exit
+    -v, --version             show noaax version number and exit
     "]
     
     System.halt(0)
   end
 
-  def process({:state, statename}) do
-    Noaax.StateStation.fetch(statename)
+  def process({:state, state}) do
+    Noaax.NoaaService.fetch_list_station(state)
+    |> decode_response
+    |> Noaax.ListStations.print
   end
 
   def process(station) when is_binary(station) do
@@ -66,7 +67,7 @@ defmodule Noaax.CLI do
     |> Noaax.Output.print
   end
 
-  def process(_), do: process(:help)
+  # def process(_), do: process(:help)
   
   def decode_response({:ok, body}), do: body
   def decode_response({:error, _error}) do

@@ -8,7 +8,7 @@
     <title>Noaax.NoaaService – Noaax v0.1.0</title>
     <link rel="stylesheet" href="dist/app-268c9dc719.css" />
     
-    <script src="dist/sidebar_items-0215abf74d.js"></script>
+    <script src="dist/sidebar_items-570d4b72aa.js"></script>
   </head>
   <body data-type="modules">
     <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
@@ -72,6 +72,11 @@
       </h1>
 
       
+        <section id="moduledoc">
+          <p>Fetch NOAA web page</p>
+
+        </section>
+      
 
       
         <section id="summary" class="details-list">
@@ -91,7 +96,26 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
+    <a href="#data_station_url/1">data_station_url(station)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>http://w1.weather.gov/xml/current_obs/STATION.xml</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#fetch/1">fetch(station)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Fetch station data, will return a tuple in the form of
+<code class="inline">{ :ok, body }</code> or <code class="inline">{ :error, body }</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#fetch_list_station/1">fetch_list_station(statename)</a>
   </div>
   
     <div class="summary-synopsis"><p>Fetch station data, will return a tuple in the form of
@@ -104,11 +128,17 @@
     <a href="#handle_response/1">handle_response(arg)</a>
   </div>
   
+    <div class="summary-synopsis"><p>Return {:ok, body} if http status code is 200</p>
+</div>
+  
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#noaa_url/1">noaa_url(station)</a>
+    <a href="#stations_url/1">stations_url(statename)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>http://w2.weather.gov/xml/current_obs/seek.php?state=STATENAME&amp;Find=Find</p>
+</div>
   
 </div>
 
@@ -131,7 +161,29 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="fetch/1">
+          <div class="detail" id="data_station_url/1">
+  
+  <div class="detail-header">
+    <a href="#data_station_url/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">data_station_url(station)</span>
+    
+      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/noaa_service.ex#L32" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>http://w1.weather.gov/xml/current_obs/STATION.xml</p>
+
+  </section>
+</div>
+<div class="detail" id="fetch/1">
   
   <div class="detail-header">
     <a href="#fetch/1" class="detail-link" title="Link to this function">
@@ -140,7 +192,30 @@
     </a>
     <span class="signature">fetch(station)</span>
     
-      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/noaa_service.ex#L12" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/noaa_service.ex#L13" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Fetch station data, will return a tuple in the form of
+<code class="inline">{ :ok, body }</code> or <code class="inline">{ :error, body }</code></p>
+
+  </section>
+</div>
+<div class="detail" id="fetch_list_station/1">
+  
+  <div class="detail-header">
+    <a href="#fetch_list_station/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">fetch_list_station(statename)</span>
+    
+      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/noaa_service.ex#L23" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -163,7 +238,7 @@
     </a>
     <span class="signature">handle_response(arg)</span>
     
-      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/noaa_service.ex#L26" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/noaa_service.ex#L52" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -172,19 +247,21 @@
     
   </div>
   <section class="docstring">
-    
+    <p>Return {:ok, body} if http status code is 200</p>
+<p>Return {:error, body} if http status code is not 200</p>
+
   </section>
 </div>
-<div class="detail" id="noaa_url/1">
+<div class="detail" id="stations_url/1">
   
   <div class="detail-header">
-    <a href="#noaa_url/1" class="detail-link" title="Link to this function">
+    <a href="#stations_url/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">noaa_url(station)</span>
+    <span class="signature">stations_url(statename)</span>
     
-      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/noaa_service.ex#L18" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/noaa_service.ex#L39" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -193,7 +270,8 @@
     
   </div>
   <section class="docstring">
-    
+    <p>http://w2.weather.gov/xml/current_obs/seek.php?state=STATENAME&amp;Find=Find</p>
+
   </section>
 </div>
 

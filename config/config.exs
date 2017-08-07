@@ -6,6 +6,8 @@ config :elixir, ansi_enabled: true
 
 config :noaax, noaa_url: "http://w1.weather.gov/xml/current_obs"
 
+config :noaax, state_station_url: "http://w1.weather.gov/xml/current_obs/seek.php?state="
+
 # This configuration is loaded before any dependency and is restricted
 # to this project. If another project depends on this project, this
 # file won't be loaded nor affect the parent project. For this reason,

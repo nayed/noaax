@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.16.2">
-    <title>Noaax.CLI – Noaax v0.1.0</title>
+    <title>Noaax.ListStations – Noaax v0.1.0</title>
     <link rel="stylesheet" href="dist/app-268c9dc719.css" />
     
     <script src="dist/sidebar_items-570d4b72aa.js"></script>
@@ -62,9 +62,9 @@
 
       <h1>
         <small class="visible-xs">Noaax v0.1.0</small>
-        Noaax.CLI
+        Noaax.ListStations
         
-          <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/cli.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/list_stations.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -73,8 +73,7 @@
 
       
         <section id="moduledoc">
-          <p>Handle the command line parsing and the dispatch to
-the various functions that end up generating a table</p>
+          <p>List station from a given state</p>
 
         </section>
       
@@ -97,32 +96,42 @@ the various functions that end up generating a table</p>
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#decode_response/1">decode_response(arg)</a>
+    <a href="#code_name/1">code_name(list)</a>
   </div>
   
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#main/1">main(argv)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#parse_args/1">parse_args(argv)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p><code class="inline">argv</code> can be:</p>
-<pre><code class="elixir">-h or --help, which returns :help.
--s or --state STATE, which returns list of station from STATE.
--v or --version, which returns the app version</code></pre>
+    <div class="summary-synopsis"><p>Receive a list, returns a list of tuples [{station_code, station_name}]</p>
+<h2>Example</h2>
+<pre><code class="iex elixir">iex&gt; list = [
+...&gt;          {&quot;td&quot;, [{&quot;headers&quot;, &quot;Station Name&quot;}],
+...&gt;            [{&quot;a&quot;, [{&quot;href&quot;, &quot;display.php?stid=KAAT&quot;}], [&quot;Alturas&quot;]}, &quot; (KAAT)&quot;]},
+...&gt;          {&quot;td&quot;, [{&quot;headers&quot;, &quot;Station Name&quot;}],
+...&gt;            [{&quot;a&quot;, [{&quot;href&quot;, &quot;display.php?stid=KACV&quot;}], [&quot;Arcata Airport&quot;]}, &quot; (KACV)&quot;]}
+...&gt;        ]
+iex&gt; Noaax.ListStations.code_name(list)
+[{&quot;KAAT&quot;, &quot;Alturas&quot;}, {&quot;KACV&quot;, &quot;Arcata Airport&quot;}]</code></pre>
 </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#process/1">process(station)</a>
+    <a href="#delete_parenthesis/1">delete_parenthesis(str)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Receive a string with parenthesis, returns a string without</p>
+<h2>Examples</h2>
+<pre><code class="iex elixir">iex&gt; Noaax.ListStations.delete_parenthesis(&quot;(KJNU)&quot;)
+&quot;KJNU&quot;
+iex&gt; Noaax.ListStations.delete_parenthesis(&quot;L56B&quot;)
+&quot;L56B&quot;</code></pre>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#print/1">print(data)</a>
+  </div>
+  
+    <div class="summary-synopsis"></div>
   
 </div>
 
@@ -145,16 +154,16 @@ the various functions that end up generating a table</p>
             </a>
             Functions
           </h1>
-          <div class="detail" id="decode_response/1">
+          <div class="detail" id="code_name/1">
   
   <div class="detail-header">
-    <a href="#decode_response/1" class="detail-link" title="Link to this function">
+    <a href="#code_name/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">decode_response(arg)</span>
+    <span class="signature">code_name(list)</span>
     
-      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/cli.ex#L73" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/list_stations.ex#L35" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -163,66 +172,64 @@ the various functions that end up generating a table</p>
     
   </div>
   <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="main/1">
-  
-  <div class="detail-header">
-    <a href="#main/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">main(argv)</span>
-    
-      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/cli.ex#L7" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="parse_args/1">
-  
-  <div class="detail-header">
-    <a href="#parse_args/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">parse_args(argv)</span>
-    
-      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/cli.ex#L21" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-    
-    
-    
-  </div>
-  <section class="docstring">
-    <p><code class="inline">argv</code> can be:</p>
-<pre><code class="elixir">-h or --help, which returns :help.
--s or --state STATE, which returns list of station from STATE.
--v or --version, which returns the app version</code></pre>
-<p>Otherwise it is an existing NOAA station.</p>
+    <p>Receive a list, returns a list of tuples [{station_code, station_name}]</p>
+<h2 id="code_name/1-example" class="section-heading">
+  <a href="#code_name/1-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example
+</h2>
+
+<pre><code class="iex elixir">iex&gt; list = [
+...&gt;          {&quot;td&quot;, [{&quot;headers&quot;, &quot;Station Name&quot;}],
+...&gt;            [{&quot;a&quot;, [{&quot;href&quot;, &quot;display.php?stid=KAAT&quot;}], [&quot;Alturas&quot;]}, &quot; (KAAT)&quot;]},
+...&gt;          {&quot;td&quot;, [{&quot;headers&quot;, &quot;Station Name&quot;}],
+...&gt;            [{&quot;a&quot;, [{&quot;href&quot;, &quot;display.php?stid=KACV&quot;}], [&quot;Arcata Airport&quot;]}, &quot; (KACV)&quot;]}
+...&gt;        ]
+iex&gt; Noaax.ListStations.code_name(list)
+[{&quot;KAAT&quot;, &quot;Alturas&quot;}, {&quot;KACV&quot;, &quot;Arcata Airport&quot;}]</code></pre>
 
   </section>
 </div>
-<div class="detail" id="process/1">
+<div class="detail" id="delete_parenthesis/1">
   
   <div class="detail-header">
-    <a href="#process/1" class="detail-link" title="Link to this function">
+    <a href="#delete_parenthesis/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">process(station)</span>
+    <span class="signature">delete_parenthesis(str)</span>
     
-      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/cli.ex#L64" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/list_stations.ex#L54" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Receive a string with parenthesis, returns a string without</p>
+<h2 id="delete_parenthesis/1-examples" class="section-heading">
+  <a href="#delete_parenthesis/1-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
+<pre><code class="iex elixir">iex&gt; Noaax.ListStations.delete_parenthesis(&quot;(KJNU)&quot;)
+&quot;KJNU&quot;
+iex&gt; Noaax.ListStations.delete_parenthesis(&quot;L56B&quot;)
+&quot;L56B&quot;</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="print/1">
+  
+  <div class="detail-header">
+    <a href="#print/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">print(data)</span>
+    
+      <a href="https://github.com/nayed/noaax/blob/master/lib/noaax/list_stations.ex#L10" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>

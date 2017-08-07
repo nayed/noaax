@@ -14,13 +14,8 @@ defmodule CliTest do
     assert parse_args(["--help", "anything"]) == :help
   end
 
-  test ":help returned if only --state or -s" do
-    assert parse_args(["-s", "anything"]) == :help
-    assert parse_args(["--state", "anything"]) == :help
-  end
-
   test ":state returned with state_name if given" do
-    assert parse_args(["--state", "--statename", "CA"]) == { :state, "CA" }
+    assert parse_args(["--state", "CA"]) == { :state, "CA" }
   end
 
   test "returns station if station given" do
