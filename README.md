@@ -25,7 +25,7 @@ Options:
 Assuming you have [elixir](http://elixir-lang.org) install:
 ```console
 $ git clone https://github.com/nayed/noaax.git
-$ cd gissues
+$ cd noaax
 $ mix deps.get
 $ mix escript.build
 ```

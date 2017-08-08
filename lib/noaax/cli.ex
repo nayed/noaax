@@ -76,7 +76,7 @@ defmodule Noaax.CLI do
   
   def decode_response({:ok, body}), do: body
   def decode_response({:error, _error}) do
-    IO.puts "Error fetching this station. Does it exists?"
+    Bunt.puts [:color202, "Error fetching this station. Does it exist?"]
 
     System.halt(0)
   end

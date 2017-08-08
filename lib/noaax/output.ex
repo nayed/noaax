@@ -5,29 +5,43 @@ defmodule Noaax.Output do
   Format the data
   """
 
+  @kv [{"weather", "Weather"}, {"temperature_string", "Temperature"},
+       {"dewpoint_string", "Dewpoint"}, {"relative_humidity", "Relative Humidity"},
+       {"heat_index_string", "Heat Index"}, {"wind_string", "Wind"},
+       {"visibility_mi", "Visibility"}, {"pressure_string", "MSL Pressure"},
+       {"pressure_in", "Altimeter"}]
+  
+  @doc """
+  Output the result of fetching data from a NOAA station
+  """
   def print(data) do
-    keys = ["weather", "temperature_string", "dewpoint_string",
-            "relative_humidity", "heat_index_string", "wind_string",
-            "visibility_mi", "pressure_string", "pressure_in"]
-    
-    display = ["Weather", "Temperature", "Dewpoint",
-               "Relative Humidity", "Heat Index", "Wind",
-               "Visibility", "MSL Pressure", "Altimeter"]
-    
-    kv = Enum.zip keys, display
-    
     Bunt.puts [:gold, retrieve(data, "location")]
     IO.puts retrieve(data, "observation_time")
     IO.puts ""
 
-    Enum.each kv, fn({k, v}) ->
+    Enum.each @kv, fn({k, v}) ->
       value_bright = Bunt.format [:bright, retrieve(data, k)]
       IO.puts Format.string(~F"{0: <20} | {1}", [v, value_bright])
     end
   end
-
+  
+  @doc """
+  Get a list of data from a NOAA station and retrieve the value from the key
+  """
   def retrieve(data, key) do
-    {_, _, string_data} = Floki.find(data, key) |> List.last
+    string_data =
+      unless Enum.empty? Floki.find(data, key) do
+        {_, _, str_data} = Floki.find(data, key) |> List.last
+        str_data
+        else
+          "No data available"
+      end
+
     string_data
   end
+  
+  @doc """
+  Export @kv constants for tests
+  """
+  def kv, do: @kv
 end
